@@ -2,6 +2,14 @@
 function getComputerChoice() {
     let choice = getRandomNumber(3);
 
+    return getMoveName(choice);
+}
+
+function getRandomNumber(range) {
+    return Math.round(Math.random() * range)
+}
+
+function getMoveName(choice) {  
     switch (choice) {
         case 1:
             return "rock"
@@ -16,12 +24,10 @@ function getComputerChoice() {
     }
 }
 
-function getRandomNumber(range) {
-    return Math.round(Math.random() * range)
-}
-
 function getPlayerChoice() {
-    return prompt("Choose between:\n1 - rock\n2 - paper\n3 - scissors")
+    prompt("Choose between:\n1 - rock\n2 - paper\n3 - scissors")
+
+    return getMoveName(choice);
 }
 
 let computerChoice = getComputerChoice();
