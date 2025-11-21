@@ -1,22 +1,21 @@
 
 function getComputerChoice() {
-    let choice = getRandomNumber(3);
+    let choice = getRandomNumber(2);
 
     return getMoveName(choice);
 }
 
 function getRandomNumber(range) {
-    return Math.round(Math.random() * range);
+    return Math.round(Math.random() * range) + 1;
 }
 
 function getMoveName(choice) {
+    console.log(choice  + " choice")
     switch (choice) {
         case 1:
             return "Rock"
-
         case 2:
             return "Paper"
-
         case 3:
             return "Scissors"
         default:
@@ -80,12 +79,12 @@ function playGame() {
     let playerChoice = getPlayerChoice();
 
     console.log(computerChoice);
-    console.log(playerChoice)
 
     let result = playRound(computerChoice, playerChoice);
     result == 1 ? playerScore++ : computerScore++;
 
     let message = winner(result, computerChoice, playerChoice);
 
-    console.log(message);
+    console.log(`${message}\nComputer score: ${computerScore}\nPlayer score: ${playerScore}    
+    `);
 }
