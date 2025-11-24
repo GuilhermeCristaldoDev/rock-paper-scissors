@@ -38,42 +38,44 @@ function winner(result, computerChoice, playerChoice) {
     }
 }
 
-function playGame() {
-    function playRound(computerChoice, playerChoice) {
+function playRound(computerChoice, playerChoice) {
 
-        if (playerChoice == "Rock") {
-            if (computerChoice == "Paper") {
-                return 0
-            } else if (computerChoice == "Scissors") {
-                return 1
+    if (playerChoice == "Rock") {
+        if (computerChoice == "Paper") {
+            return 0
+        } else if (computerChoice == "Scissors") {
+            return 1
 
-            } else {
-                return null
-            }
-        } else if (playerChoice == "Paper") {
-            if (computerChoice == "Rock") {
-                return 1
-            } else if (computerChoice == "Scissors") {
-                return 0
-            } else {
-                return null
-            }
         } else {
-            if (computerChoice == "Rock") {
-                return 0
-            } else if (computerChoice == "Paper") {
-                return 1
+            return null
+        }
+    } else if (playerChoice == "Paper") {
+        if (computerChoice == "Rock") {
+            return 1
+        } else if (computerChoice == "Scissors") {
+            return 0
+        } else {
+            return null
+        }
+    } else {
+        if (computerChoice == "Rock") {
+            return 0
+        } else if (computerChoice == "Paper") {
+            return 1
 
-            } else {
-                return null
-            }
+        } else {
+            return null
         }
     }
+}
+
+function playGame() {
+
 
     function incrementScore(result) {
         if (result != null) {
             if (result == 1) {
-                    playerScore++;
+                playerScore++;
             } computerScore++;
         }
     }
