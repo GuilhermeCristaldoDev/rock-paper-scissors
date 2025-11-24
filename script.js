@@ -1,3 +1,11 @@
+const buttonsDiv = document.querySelector("#choice-buttons");
+const displayResult = document.querySelector("#results");
+
+buttonsDiv.addEventListener("click", (event) => {
+    let playerChoice = getMoveName(event.target.textContent);
+
+    console.log(playRound(getComputerChoice(), playerChoice));
+}) 
 
 function getComputerChoice() {
     let choice = getRandomNumber(2);
@@ -20,12 +28,6 @@ function getMoveName(choice) {
         default:
             return "Error";
     }
-}
-
-function getPlayerChoice() {
-    let choice = Number(prompt("Choose between:\n1 - rock\n2 - paper\n3 - scissors"));
-
-    return getMoveName(choice);
 }
 
 function winner(result, computerChoice, playerChoice) {
