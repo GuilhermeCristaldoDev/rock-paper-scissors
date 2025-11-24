@@ -1,11 +1,14 @@
 const buttonsDiv = document.querySelector("#choice-buttons");
-const displayResult = document.querySelector("#results");
+const roundResult = document.querySelector("#round");
+const roundText = document.querySelector("#round-text");
+const computerScoreboard = document.querySelector("#computer-score");
+const playerScoreboard = document.querySelector("#player-score");
 
 buttonsDiv.addEventListener("click", (event) => {
-    let playerChoice = getMoveName(event.target.textContent);
-
-    console.log(playRound(getComputerChoice(), playerChoice));
-}) 
+    let playerChoice = event.target.textContent;
+  
+    playGame(playerChoice)
+})
 
 function getComputerChoice() {
     let choice = getRandomNumber(2);
@@ -40,39 +43,14 @@ function winner(result, computerChoice, playerChoice) {
     }
 }
 
-function playRound(computerChoice, playerChoice) {
-
-    if (playerChoice == "Rock") {
-        if (computerChoice == "Paper") {
-            return 0
-        } else if (computerChoice == "Scissors") {
-            return 1
-
-        } else {
-            return null
-        }
-    } else if (playerChoice == "Paper") {
-        if (computerChoice == "Rock") {
-            return 1
-        } else if (computerChoice == "Scissors") {
-            return 0
-        } else {
-            return null
-        }
-    } else {
-        if (computerChoice == "Rock") {
-            return 0
-        } else if (computerChoice == "Paper") {
-            return 1
-
-        } else {
-            return null
-        }
-    }
+function displayMessage(round, result, computerScore, playerScore) {
+    roundResult.textContent = `Round ${round}:`;
+    roundText.textContent = result;
+    computerScoreboard.textContent = computerScore;
+    playerScoreboard.textContent = playerScore;
 }
 
-function playGame() {
-
+function playGame(playerChoice) {
 
     function incrementScore(result) {
         if (result != null) {
@@ -82,21 +60,49 @@ function playGame() {
         }
     }
 
+    function playRound(computerChoice, playerChoice) {
+
+        if (playerChoice == "Rock") {
+            if (computerChoice == "Paper") {
+                return 0
+            } else if (computerChoice == "Scissors") {
+                return 1
+
+            } else {
+                return null
+            }
+        } else if (playerChoice == "Paper") {
+            if (computerChoice == "Rock") {
+                return 1
+            } else if (computerChoice == "Scissors") {
+                return 0
+            } else {
+                return null
+            }
+        } else {
+            if (computerChoice == "Rock") {
+                return 0
+            } else if (computerChoice == "Paper") {
+                return 1
+
+            } else {
+                return null
+            }
+        }
+    }
+
     let computerScore = 0;
     let playerScore = 0;
     let rounds = 1;
 
-    while (rounds <= 5) {
-        let computerChoice = getComputerChoice();
-        let playerChoice = getPlayerChoice();
+    let computerChoice = getComputerChoice();
 
-        let result = playRound(computerChoice, playerChoice);
-        incrementScore(result);
+    let result = playRound(computerChoice, playerChoice);
+    incrementScore(result);
 
-        let message = winner(result, computerChoice, playerChoice);
+    let message = winner(result, computerChoice, playerChoice);
 
-        console.log(`Round ${rounds}:\n${message}\nComputer score: ${computerScore}\nPlayer score: ${playerScore}`);
+    displayMessage(rounds, message, computerScore, playerScore);
 
-        rounds++;
-    }
+    rounds++;
 }
