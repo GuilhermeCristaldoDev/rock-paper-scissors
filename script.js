@@ -3,10 +3,11 @@ const roundResult = document.querySelector("#round");
 const roundText = document.querySelector("#round-text");
 const computerScoreboard = document.querySelector("#computer-score");
 const playerScoreboard = document.querySelector("#player-score");
+const winnerDisplay = document.querySelector("#winner");
 
 buttonsDiv.addEventListener("click", (event) => {
-    let playerChoice = event.target.textContent;
-  
+    let playerChoice = event.target.dataset.move;
+
     playGame(playerChoice)
 })
 
@@ -17,7 +18,7 @@ function getComputerChoice() {
 }
 
 function getRandomNumber(range) {
-    return Math.round(Math.random() * range) + 1;
+    return Math.floor(Math.random() * range) + 1;   
 }
 
 function getMoveName(choice) {
@@ -33,7 +34,7 @@ function getMoveName(choice) {
     }
 }
 
-function winner(result, computerChoice, playerChoice) {
+function winnerRound(result, computerChoice, playerChoice) {
     if (result == 0) {
         return `You lose! ${computerChoice} beats ${playerChoice}.`;
     } else if (result == 1) {
@@ -46,9 +47,22 @@ function winner(result, computerChoice, playerChoice) {
 function displayMessage(round, result, computerScore, playerScore) {
     roundResult.textContent = `Round ${round}:`;
     roundText.textContent = result;
-    computerScoreboard.textContent = computerScore;
     playerScoreboard.textContent = playerScore;
+    computerScoreboard.textContent = computerScore;
 }
+
+function getWinner() {
+    if (computerScore === playerScore) return "Tie"
+    return computerScore > playerScore ? "Computer wins" : "Player wins"
+}
+
+function winnerMessage(message) {
+    winnerDisplay.textContent = message;
+}
+
+let computerScore = 0;
+let playerScore = 0;
+let rounds = 0;
 
 function playGame(playerChoice) {
 
@@ -56,7 +70,10 @@ function playGame(playerChoice) {
         if (result != null) {
             if (result == 1) {
                 playerScore++;
-            } computerScore++;
+            } else {
+                computerScore++;
+            }
+
         }
     }
 
@@ -91,18 +108,27 @@ function playGame(playerChoice) {
         }
     }
 
-    let computerScore = 0;
-    let playerScore = 0;
-    let rounds = 1;
-
+    winnerMessage("");
+    
     let computerChoice = getComputerChoice();
 
     let result = playRound(computerChoice, playerChoice);
+
+    rounds++;
     incrementScore(result);
 
-    let message = winner(result, computerChoice, playerChoice);
+    let message = winnerRound(result, computerChoice, playerChoice);
 
     displayMessage(rounds, message, computerScore, playerScore);
 
-    rounds++;
+    if (rounds === 5) {
+        let winner = getWinner();
+
+        winnerMessage(winner);
+
+        rounds = 0;
+        playerScore = 0;
+        computerScore = 0;
+    }
+
 }

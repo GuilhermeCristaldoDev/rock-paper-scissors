@@ -9,15 +9,17 @@
     <h1>Rock Paper Scissors</h1>
 
     <div id="choice-buttons">
-        <button>Rock</button>
-        <button>Paper</button>
-        <button>Scissors</button>
+        <button data-move="Rock">Rock</button>
+        <button data-move="Paper">Paper</button>
+        <button data-move="Scissors">Scissors</button>
     </div>
     <br>
     <div id="results">
         <h3 id="round"></h3>
         <span id="round-text"></span><br>
-        <span id="score">Computer: <span id="computer-score">0</span> You: <span id="player-score">0</span></span>
+        <span id="score"> You: <span id="player-score">0</span> Computer: <span id="computer-score">0</span></span>
+        <div id="winner">
+        </div>
     </div>
     <script src="./script.js"></script>
 </body>
